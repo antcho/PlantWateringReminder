@@ -1,15 +1,13 @@
 package fr.lille1.raingeval.plantwateringreminder.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.Date;
 
 import fr.lille1.raingeval.plantwateringreminder.App;
 import fr.lille1.raingeval.plantwateringreminder.R;
@@ -20,6 +18,7 @@ import fr.lille1.raingeval.plantwateringreminder.entities.PlantDao;
 public class PlantFormActivity extends AppCompatActivity {
 
     private PlantDao plantDao;
+    private Plant plant;
 
     private EditText nameEdit;
     private EditText frequencyEdit;
@@ -108,11 +107,10 @@ public class PlantFormActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpdateButtonListener(final Long plantId) {
+    private void setUpdateButtonListener() {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Plant plant = plantDao.load(plantId);
                 plant.setName(nameEdit.getText().toString());
                 plant.setWateringFrequency(Integer.parseInt(frequencyEdit.getText().toString()));
                 plantDao.update(plant);
@@ -159,14 +157,14 @@ public class PlantFormActivity extends AppCompatActivity {
 
         Long plantId = intent.getLongExtra(MainActivity.PLANT_ID, new Long(0));
 
+        plant = plantDao.load(plantId);
+
         setDeleteButtonListener(plantId);
         setEditButtonListener();
-        setFields(true, plantId);
+        setFields(true);
     }
 
     private void displayEditMode() {
-
-        Long plantId = intent.getLongExtra(MainActivity.PLANT_ID, new Long(0));
 
         nameView.setVisibility(View.GONE);
         frequencyView.setVisibility(View.GONE);
@@ -181,34 +179,30 @@ public class PlantFormActivity extends AppCompatActivity {
         updateButton.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.VISIBLE);
 
-        setUpdateButtonListener(plantId);
+        setUpdateButtonListener();
         setCancelButtonListener();
 
 
         nameEdit.setVisibility(View.VISIBLE);
         frequencyEdit.setVisibility(View.VISIBLE);;
 
-        setFields(false, plantId);
+        setFields(false);
     }
 
-    private void setFields(boolean viewMode, Long plantId) {
-        plantId = intent.getLongExtra(MainActivity.PLANT_ID, new Long(0));
-        if (plantId != 0){
-            Plant plant = plantDao.load(plantId);
-            String name = plant.getName();
-            int frequency = plant.getWateringFrequency();
-            int days = plant.getDaysSinceLastWatering();
+    private void setFields(boolean viewMode) {
+        String name = plant.getName();
+        int frequency = plant.getWateringFrequency();
+        int days = plant.getDaysSinceLastWatering();
 
-            if (viewMode) {
-                nameView.setText(name);
-                frequencyView.setText(Integer.toString(frequency));
-                daysView.setText(Integer.toString(days));
-            } else {
-                nameEdit.setText(name);
-                frequencyEdit.setText(Integer.toString(frequency));
-            }
-
+        if (viewMode) {
+            nameView.setText(name);
+            frequencyView.setText(Integer.toString(frequency));
+            daysView.setText(Integer.toString(days));
+        } else {
+            nameEdit.setText(name);
+            frequencyEdit.setText(Integer.toString(frequency));
         }
+
     }
 
     private Plant createPlantByForm() {

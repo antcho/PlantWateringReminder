@@ -2,12 +2,10 @@ package fr.lille1.raingeval.plantwateringreminder.entities;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import fr.lille1.raingeval.plantwateringreminder.activities.MainActivity;
