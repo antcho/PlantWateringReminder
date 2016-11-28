@@ -92,6 +92,7 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantViewH
         holder.wateringFrequency.setText(Integer.toString(plant.getWateringFrequency()));
         View itemView = holder.itemView;
 
+
         int daysSinceLastWatering = plant.getDaysSinceLastWatering();
         int frequency = plant.getWateringFrequency();
         if (daysSinceLastWatering < frequency - 1){

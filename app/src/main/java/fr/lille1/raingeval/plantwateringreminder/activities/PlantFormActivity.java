@@ -23,7 +23,6 @@ public class PlantFormActivity extends AppCompatActivity {
 
     private EditText nameEdit;
     private EditText frequencyEdit;
-    private EditText daysEdit;
 
     private TextView nameView;
     private TextView frequencyView;
@@ -113,8 +112,9 @@ public class PlantFormActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Plant plant = createPlantByForm();
-                plant.setId(plantId);
+                Plant plant = plantDao.load(plantId);
+                plant.setName(nameEdit.getText().toString());
+                plant.setWateringFrequency(Integer.parseInt(frequencyEdit.getText().toString()));
                 plantDao.update(plant);
                 displayViewMode();
             }
@@ -212,12 +212,11 @@ public class PlantFormActivity extends AppCompatActivity {
     }
 
     private Plant createPlantByForm() {
+
         String name = nameEdit.getText().toString();
         int frequency = Integer.parseInt(frequencyEdit.getText().toString());
-        Date date = new Date();
-        long dateValue = date.getTime();
         Plant newPlant = new Plant(null, name, frequency, 0, MainActivity.currentTime);
-        System.out.println(newPlant.getId());
         return newPlant;
+
     }
 }
