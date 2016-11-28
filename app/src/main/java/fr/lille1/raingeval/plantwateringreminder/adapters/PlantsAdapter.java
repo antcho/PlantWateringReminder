@@ -95,11 +95,11 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantViewH
         int daysSinceLastWatering = plant.getDaysSinceLastWatering();
         int frequency = plant.getWateringFrequency();
         if (daysSinceLastWatering < frequency - 1){
-            itemView.setBackgroundColor(Color.GREEN);
+            itemView.setBackgroundColor(Color.parseColor("#8BC34A"));
         } else if (daysSinceLastWatering > frequency) {
-            itemView.setBackgroundColor(Color.RED);
+            itemView.setBackgroundColor(Color.parseColor("#FF5722"));
         } else {
-            itemView.setBackgroundColor(Color.YELLOW);
+            itemView.setBackgroundColor(Color.parseColor("#FF9800"));
         }
 
 

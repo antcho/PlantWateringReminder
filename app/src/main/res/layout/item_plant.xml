@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewPlantName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/plant"/>
 
-    <TextView
-        android:id="@+id/textViewPlantWateringFrequency"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp">
+
+        <TextView
+            android:id="@+id/textViewPlantName"
+            android:layout_width="match_parent"
+            android:textColor="#000"
+            android:text="Nom"
+            android:textSize="18sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textViewPlantWateringFrequency"
+            android:layout_width="match_parent"
+            android:textColor="#444"
+            android:text="Day remaining"
+            android:textSize="16sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
 
 </LinearLayout>
