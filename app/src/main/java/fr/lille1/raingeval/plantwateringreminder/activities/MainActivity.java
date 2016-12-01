@@ -54,12 +54,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
 
                 Intent intent = new Intent(getApplicationContext(), PlantFormActivity.class);
                 intent.putExtra(ADD_MODE, true);
-                //intent.putExtra(CURRENT_TIME, currentTime);
                 startActivity(intent);
             }
         });
@@ -77,15 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(plantsAdapter);
 
-        //updatePlants();
-
     }
 
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        System.out.println(MainActivity.currentTime);
         updatePlants();
     }
 
@@ -103,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.menu = menu;
@@ -113,12 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_fixtures) {
             fillDatabaseFixtures();
             return true;
@@ -140,9 +129,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), PlantFormActivity.class);
             intent.putExtra(PLANT_ID, plantId);
             intent.putExtra(VIEW_MODE, true);
-            //intent.putExtra(CURRENT_TIME, currentTime);
             startActivity(intent);
-            System.out.println(plant.getLastWateringDate());
             updatePlants();
         }
     };
@@ -159,8 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillDatabaseFixtures() {
         for (int i=0; i<10; i++) {
-            Date date = new Date();
-            //long dateValue = date.getTime();
             Plant plant = new Plant(null, "Plant" + i, 21-i , 0, currentTime);
             plantDao.insert(plant);
         }
@@ -176,16 +161,12 @@ public class MainActivity extends AppCompatActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             Date date = new Date(currentTime);
-            // Use the current time as the default values for the picker
             final Calendar c = Calendar.getInstance();
             c.setTime(date);
 
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of TimePickerDialog and return it*
-
 
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
@@ -196,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
             calendar.getTimeInMillis();
-            //System.out.println("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa : " + calendar.getTimeInMillis());
             currentTime = calendar.getTimeInMillis();
         }
 

@@ -26,7 +26,6 @@ public class Plant {
     private int wateringFrequency;
     private int daysSinceLastWatering;
     private long lastWateringDate;
-    //private int lastWateringDate;
 
     public Plant() {
 
@@ -91,8 +90,6 @@ public class Plant {
     }
 
     public int computeDaysSinceLastWatering() {
-        Date date = new Date();
-        //long timeNow = date.getTime();
 
         long timeDifference = MainActivity.currentTime - lastWateringDate;
         int days = (int) (timeDifference / 86400000);
