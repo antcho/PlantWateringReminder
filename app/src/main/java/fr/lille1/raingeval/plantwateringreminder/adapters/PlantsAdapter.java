@@ -101,6 +101,7 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantViewH
         } else {
             itemView.setBackgroundColor(Color.parseColor("#FF9800"));
         }
+        itemView.setBottom(1);
 
 
 
